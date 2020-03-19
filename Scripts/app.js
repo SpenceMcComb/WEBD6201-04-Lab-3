@@ -1,4 +1,8 @@
-
+/**
+ * @author Spence McComb
+ * Student ID: 100426427
+ * Date Completed: 2020/03/19
+ */
 
 class Contact
 {
@@ -22,8 +26,6 @@ class Item
         this.price = price;
     }
 }
-
-
 
 
 "use strict";
@@ -170,8 +172,9 @@ let app;
             XHR.addEventListener("readystatechange", function(){
                 if((XHR.readyState === 4) && (XHR.status === 200))
                 {
+                    // Add an event listener to the task list button
                     $("#taskListButton")[0].addEventListener("click", function(){
-                        // Load the task list as the current page's content
+                        // Load the task list as the current page's content when the button is clicked
                         LoadPageContent("mainContent", "./Views/content/tasklist.html", DisplayTaskList);
                     });
                 }
@@ -183,9 +186,7 @@ let app;
 
         } catch (error) {
             console.log("Error: " + error);
-        }
-
-        
+        }   
     }
 
     function DisplayProductsContent()
@@ -246,9 +247,7 @@ let app;
              XHR.send();
         } catch (error) {
             console.log("Error: " + error);
-        }
-
-        
+        } 
     }
 
     function DisplayServicesContent()

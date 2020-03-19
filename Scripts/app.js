@@ -143,8 +143,6 @@ let app;
                     case "login":
                         LoadPageContent("mainContent", "./Views/content/login.html", DisplayLoginContent);
                         break;
-                    case "tasklist":
-                        LoadPageContent("mainContent", "./Views/content/tasklist.html", DisplayTaskList);
                 }
             }); 
         }
@@ -155,14 +153,39 @@ let app;
     {
         document.title = "WEBD6201 - Home";
 
-       LoadPageContent("mainHeader","./Views/partials/header.html", activateNavbar, "home");
+        LoadPageContent("mainHeader","./Views/partials/header.html", activateNavbar, "home");
 
-       LoadPageContent("mainContent", "./Views/content/home.html");
+        LoadPageContent("mainContent", "./Views/content/home.html");
 
-       LoadPageContent("mainFooter","./Views/partials/footer.html");
+        LoadPageContent("mainFooter","./Views/partials/footer.html");
 
-       
-       
+        // 1. CREATE A TRY / CATCH FOR EXCEPTION HANDLING
+        try {
+            // 2. INSTANTIATE A NEW XHR OBJECT
+            let XHR = new XMLHttpRequest();
+            
+            // 3. ADD AN EVENT LISTENER FOR "READYSTATECHANGE"
+            XHR.addEventListener("readystatechange", function(){
+                if((XHR.readyState === 4) && (XHR.status === 200))
+                {
+                    console.log("Test");
+                    $("#taskListButton")[0].addEventListener("click", function(){
+                        LoadPageContent("mainContent", "./Views/content/tasklist.html", DisplayTaskList);
+                    });
+                }
+            });
+
+            // 4. OPEN A CHANNEL - MAKE A REQUEST WITH THE APPROPRIATE URL
+            XHR.open("GET","./Views/content/home.html", true);
+
+            // 5. SEND THE REQUEST TO THE SERVER
+            XHR.send();
+
+        } catch (error) {
+            console.log("Error: " + error);
+        }
+
+        
     }
 
     function DisplayProductsContent()
@@ -177,6 +200,7 @@ let app;
 
             // 3. ADD AN EVENT LISTENER FOR "READSTATECHANGE"
             XHR.addEventListener("readystatechange", function(){
+                
                 if((XHR.readyState === 4) && (XHR.status === 200))
                 {
                     // 6. GET A RESPONSE FROM THE SERVER

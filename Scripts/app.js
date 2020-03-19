@@ -143,6 +143,8 @@ let app;
                     case "login":
                         LoadPageContent("mainContent", "./Views/content/login.html", DisplayLoginContent);
                         break;
+                    case "tasklist":
+                        LoadPageContent("mainContent", "./Views/content/tasklist.html", DisplayTaskList);
                 }
             }); 
         }
@@ -158,6 +160,8 @@ let app;
        LoadPageContent("mainContent", "./Views/content/home.html");
 
        LoadPageContent("mainFooter","./Views/partials/footer.html");
+
+       
        
     }
 

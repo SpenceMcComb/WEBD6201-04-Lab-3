@@ -1,3 +1,5 @@
+
+
 class Contact
 {
     constructor(contactName = "", emailAddress = "", contactNumber = "", contactMessage = "")
@@ -159,26 +161,24 @@ let app;
 
         LoadPageContent("mainFooter","./Views/partials/footer.html");
 
-        // 1. CREATE A TRY / CATCH FOR EXCEPTION HANDLING
+        // Add the event listener to the task list button
         try {
-            // 2. INSTANTIATE A NEW XHR OBJECT
+            // Instantiate a new XHR object
             let XHR = new XMLHttpRequest();
             
-            // 3. ADD AN EVENT LISTENER FOR "READYSTATECHANGE"
+            // Look for "readystatechange" events
             XHR.addEventListener("readystatechange", function(){
                 if((XHR.readyState === 4) && (XHR.status === 200))
                 {
-                    console.log("Test");
                     $("#taskListButton")[0].addEventListener("click", function(){
+                        // Load the task list as the current page's content
                         LoadPageContent("mainContent", "./Views/content/tasklist.html", DisplayTaskList);
                     });
                 }
             });
 
-            // 4. OPEN A CHANNEL - MAKE A REQUEST WITH THE APPROPRIATE URL
+            // Make a request with the homepage url and send it to the server
             XHR.open("GET","./Views/content/home.html", true);
-
-            // 5. SEND THE REQUEST TO THE SERVER
             XHR.send();
 
         } catch (error) {
@@ -203,7 +203,7 @@ let app;
                 
                 if((XHR.readyState === 4) && (XHR.status === 200))
                 {
-                    // 6. GET A RESPONSE FROM THE SERVER
+                    // 6. GET A RESPONSE FROM THE SERVER`
                     let data = JSON.parse(XHR.responseText);
                     
                     data.products.forEach(item => {
@@ -411,6 +411,7 @@ let app;
     function DisplayTaskList()
     {
         document.title = "WEBD6201 - Task List";
+        $(".editTextInput").hide();
 
         // Task 1 a
         $("#newTaskButton").on("click", function(){
@@ -427,8 +428,8 @@ let app;
             <input type="text" class="form-control edit-task editTextInput">
             </li>
             `
-            
             $("#taskList").append(newElement);
+            $(".editTextInput").hide();
         });
 
         // Task 1 b
